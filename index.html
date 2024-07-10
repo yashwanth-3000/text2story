@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Text2Story Waiting List!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Experience Next-Level Storytelling with AI!</h1>
+        <p>Turn written stories into captivating AI-driven videos with personalized voiceovers. Be first to experience the future of digital storytelling!</p>
+        <form action="/submit-email" method="POST" onsubmit="return checkEmail()">
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Join Waitlist</button>
+        </form>
+
+    </div>
+    <script>
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function checkEmail() {
+            var email = document.getElementById('email').value;
+            if (validateEmail(email)) {
+                alert("Thank you for joining our waiting list!");
+            } else {
+                alert("Please enter a valid email address.");
+            }
+            return false; // Prevent form submission for demonstration
+        }
+    </script>
+</body>
+</html>
