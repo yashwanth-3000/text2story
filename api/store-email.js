@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Ensure the Emails table exists
+    // Example usage: ensure table exists and insert email
     await sql`
       CREATE TABLE IF NOT EXISTS Emails (
         id SERIAL PRIMARY KEY,
@@ -20,13 +20,13 @@ export default async function handler(req, res) {
       );
     `;
 
-    // Insert the email into the Emails table
     const result = await sql`
       INSERT INTO Emails (email) VALUES (${email});
     `;
-    return res.status(200).json({ result });
+    
+    return res.status(200).json({ message: 'Email stored successfully' });
   } catch (error) {
-    console.error('Error storing email:', error.message); // Log the error for debugging
+    console.error('Error storing email:', error.message);
     return res.status(500).json({ error: error.message });
   }
 }
