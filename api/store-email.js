@@ -26,6 +26,7 @@ export default async function handler(req, res) {
     `;
     return res.status(200).json({ result });
   } catch (error) {
+    console.error('Error storing email:', error.message); // Log the error for debugging
     return res.status(500).json({ error: error.message });
   }
 }
