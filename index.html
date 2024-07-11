@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Experience Next-Level Storytelling with AI!</h1>
         <p>Turn written stories into captivating AI-driven videos with personalized voiceovers. Be first to experience the future of digital storytelling!</p>
-        <form action="/submit-email" method="POST" onsubmit="return checkEmail()">
+        <form action="/api/store-emails" method="POST" onsubmit="return checkEmail()">
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
             <button type="submit">Join Waitlist</button>
         </form>
@@ -22,14 +22,31 @@
             return re.test(email);
         }
 
-        function checkEmail() {
+        async function checkEmail() {
             var email = document.getElementById('email').value;
             if (validateEmail(email)) {
-                alert("Thank you for joining our waiting list!");
+                try {
+                    const response = await fetch('/api/store-emails', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email })
+                    });
+
+                    if (response.ok) {
+                        alert('Thank you for joining our waiting list!');
+                    } else {
+                        const errorData = await response.json();
+                        alert('Error: ' + errorData.error);
+                    }
+                } catch (error) {
+                    alert('Network error: ' + error.message);
+                }
             } else {
                 alert("Please enter a valid email address.");
             }
-            return false; // Prevent form submission for demonstration
+            return false; // Prevent form submission
         }
     </script>
 </body>
